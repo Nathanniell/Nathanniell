@@ -1,0 +1,783 @@
+{
+  "nbformat": 4,
+  "nbformat_minor": 0,
+  "metadata": {
+    "colab": {
+      "provenance": [],
+      "authorship_tag": "ABX9TyO/1V37MyRrdJc83cZf4bza",
+      "include_colab_link": true
+    },
+    "kernelspec": {
+      "name": "python3",
+      "display_name": "Python 3"
+    },
+    "language_info": {
+      "name": "python"
+    }
+  },
+  "cells": [
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "view-in-github",
+        "colab_type": "text"
+      },
+      "source": [
+        "<a href=\"https://colab.research.google.com/github/DJunichiR/Desain-Analisis-Algoritma/blob/main/Desain_Analisis_Algoritma_PERTEMUAN_5.ipynb\" target=\"_parent\"><img src=\"https://colab.research.google.com/assets/colab-badge.svg\" alt=\"Open In Colab\"/></a>"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "execution_count": 109,
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "UWuQnKDHOUgF",
+        "outputId": "fc2cf223-88cc-4022-9e35-e3ad9982b912"
+      },
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "The minimum number in the array is: 1\n",
+            "The maximum number in the array is  35\n"
+          ]
+        }
+      ],
+      "source": [
+        "def divideAndConquer_Max(arr, ind, len):\n",
+        "  maximum = -1;\n",
+        "\n",
+        "  if(ind >= len -2):\n",
+        "    if (arr[ind] > arr[ind + 1]):\n",
+        "      return arr[ind];\n",
+        "    else:\n",
+        "        return arr[ind + 1];\n",
+        "\n",
+        "\n",
+        "  maximum = divideAndConquer_Max(arr, ind + 1, len);\n",
+        "\n",
+        "  if (arr[ind] > maximum):\n",
+        "    return arr[ind];\n",
+        "  else:\n",
+        "      return maximum;\n",
+        "\n",
+        "def divideAndConquer_Min(arr, ind, len):\n",
+        "  minimum = 0;\n",
+        "  if (ind >= len - 2):\n",
+        "    if (arr[ind] < arr [ind + 1]):\n",
+        "      return arr[ind];\n",
+        "    else:\n",
+        "      return arr[ind + 1];\n",
+        "\n",
+        "  minimum = divideAndConquer_Min(arr, ind + 1, len);\n",
+        "\n",
+        "  if (arr[ind] < minimum):\n",
+        "    return arr[ind];\n",
+        "  else:\n",
+        "    return minimum;\n",
+        "\n",
+        "if __name__ == '__main__':\n",
+        "\n",
+        "    minimum, maximum = 0, -1;\n",
+        "\n",
+        "    # array initialization\n",
+        "    arr = [4,12,23,9,21,1,35,2,24];\n",
+        "\n",
+        "    maximum = divideAndConquer_Max(arr, 0, 9);\n",
+        "    minimum = divideAndConquer_Min(arr, 0, 9);\n",
+        "\n",
+        "    print(\"The minimum number in the array is:\", minimum);\n",
+        "    print(\"The maximum number in the array is \", maximum);"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "# Mergesort in python\n",
+        "def mergeSort(array):\n",
+        "    if len(array) > 1:\n",
+        "\n",
+        "      # r is point where the array is divided inti two subarrays\n",
+        "      r = len(array)//2\n",
+        "      L = array[:r]\n",
+        "      M = array[r:]\n",
+        "\n",
+        "      #sort the two halves\n",
+        "      mergeSort(L)\n",
+        "      mergeSort(M)\n",
+        "\n",
+        "      i = j = k = 0\n",
+        "\n",
+        "      # Until we reach either end of either L or M, pisk larger among\n",
+        "      # elements L or M and place them in the correct position at A[p..r]\n",
+        "      while i < len(L) and j < len(M):\n",
+        "        if L[i] < M[j]:\n",
+        "            array[k] = L[i]\n",
+        "            i += 1\n",
+        "        else:\n",
+        "            array[k] = M[j]\n",
+        "            j += 1\n",
+        "        k += 1\n",
+        "\n",
+        "      # when we run out pof elements in either L or M,\n",
+        "      # pick up the remaining elements and put in A[p..r]\n",
+        "\n",
+        "      while i < len(L):\n",
+        "        array[k] = L[i]\n",
+        "        i += 1\n",
+        "        k += 1\n",
+        "\n",
+        "      while j < len(M):\n",
+        "        array[k] = M[j]\n",
+        "        j += 1\n",
+        "        k += 1"
+      ],
+      "metadata": {
+        "id": "clO2ZaGUfc_i"
+      },
+      "execution_count": 85,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "# Print the array\n",
+        "def printList(array):\n",
+        "    for i in range(len(array)):\n",
+        "      print(array[i], end=\" \")\n",
+        "    print()\n",
+        "\n",
+        "# Driver program\n",
+        "if __name__ == '__main__':\n",
+        "    array = [4,12,23,9,21,1,35,2,24]\n",
+        "\n",
+        "    mergeSort(array)\n",
+        "\n",
+        "    print(\"Sorted array is: \")\n",
+        "    printList(array)"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "dBA2TeEiYKa1",
+        "outputId": "3c11ba9d-9849-4e73-fda3-a0e3c4c8b6a1"
+      },
+      "execution_count": 95,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "Sorted array is: \n",
+            "1 2 4 9 12 21 23 24 35 \n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "# Function to find the partition position\n",
+        "def partition(array, low, high):\n",
+        "\n",
+        "  # choose the rightmost element as pivot\n",
+        "  pivot = array[high]\n",
+        "\n",
+        "  # pointer for greater element\n",
+        "  i = low - 1\n",
+        "\n",
+        "  # traverse through all elements\n",
+        "  # compare each element with pivot\n",
+        "\n",
+        "  for j in range(low, high):\n",
+        "    if array[j] <= pivot:\n",
+        "\n",
+        "      # If element smaller than pivot is found\n",
+        "      # swap it with the greater element pointed by i\n",
+        "      i = i + 1\n",
+        "\n",
+        "      # Swapping element at   with element at j\n",
+        "      (array[i], array[j]) = (array[j], array[i])\n",
+        "\n",
+        "  # Swap the pivot element with the greater element specified by i\n",
+        "  (array[i + 1], array[high]) = (array[high], array[i + 1])\n",
+        "\n",
+        "  # Return the position from where partition is done\n",
+        "  return i + 1\n",
+        "\n",
+        "# function to perform quicksort\n",
+        "def quickSort(array, low, high):\n",
+        "    if low < high:\n",
+        "\n",
+        "      # Find pivot element such that\n",
+        "      # lement smaller than pivot are on the left\n",
+        "      # element greater than pivot are on the right\n",
+        "      pi = partition(array, low, high)\n",
+        "\n",
+        "      # Recursive call on the left of pivot\n",
+        "      quickSort(array, low, pi - 1)\n",
+        "\n",
+        "      # Recursive call on the left of pivot\n",
+        "      quickSort(array, pi + 1, high)\n",
+        "data = [4, 12, 23, 9, 21, 1, 35, 2, 24]\n",
+        "print(\"Unsorted Array\")\n",
+        "print(data)\n",
+        "\n",
+        "size = len(data)\n",
+        "\n",
+        "quickSort(data, 0, size - 1)\n",
+        "\n",
+        "print('Sorted Array in Ascending Order:')\n",
+        "print(data)"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "ruX4-Ca8gTiQ",
+        "outputId": "493fb84e-e117-4125-cf89-a64c53cbd737"
+      },
+      "execution_count": 108,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "Unsorted Array\n",
+            "[4, 12, 23, 9, 21, 1, 35, 2, 24]\n",
+            "Sorted Array in Ascending Order:\n",
+            "[1, 2, 4, 9, 12, 21, 23, 24, 35]\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "# Hitung Inversi\n",
+        "\n",
+        "def countInversion(arr):\n",
+        "  result = 0\n",
+        "  for i in range(len(arr)):\n",
+        "      for j in range(i+1,len(arr)):\n",
+        "          if arr[i] > arr[j]:\n",
+        "              result+=1\n",
+        "  return result\n",
+        "\n",
+        "arr=[21, 70, 36, 14, 25]\n",
+        "result=countInversion(arr)\n",
+        "print(result)"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "_6I2OJ17izZl",
+        "outputId": "f7fcafc5-8b18-4bda-dff2-31d68e4e6238"
+      },
+      "execution_count": 101,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "6\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "# Hitung Inversi dengan divide dan conquer\n",
+        "\n",
+        "def countIversion(arr):\n",
+        "  icount=0\n",
+        "  if len(arr)<=1:\n",
+        "      return icount\n",
+        "\n",
+        "  mid=len(arr)//2\n",
+        "  left=arr[:mid]\n",
+        "  right=arr[mid:]\n",
+        "  icount+=countInversion(left)\n",
+        "  icount+=countInversion(right)\n",
+        "  i=j=k=0\n",
+        "\n",
+        "  #print(left)\n",
+        "  #print(right)\n",
+        "  while i<len(left) and j<len(right):\n",
+        "      if left[i]<right[j]:\n",
+        "         arr[k]=left[i]\n",
+        "         i+1\n",
+        "      else:\n",
+        "          #print(Left[i],right[j])\n",
+        "          arr[k]=right[j]\n",
+        "          j+1\n",
+        "          icount+=(mid-i)\n",
+        "      k+1\n",
+        "\n",
+        "  while i<len(left):\n",
+        "      arr[k]=left[i]\n",
+        "      i+=1\n",
+        "      k+1\n",
+        "  while j<len(right):\n",
+        "      arr[k]=right[j]\n",
+        "      j+=1\n",
+        "      k+=1\n",
+        "\n",
+        "  return icount\n",
+        "\n",
+        "arr=[1, 20, 6, 4, 5]\n",
+        "result = countInversion(arr)\n",
+        "print(result)"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "cYwl0cJxjhB-",
+        "outputId": "36d2eee8-eac5-4e02-eab9-4081fe4278e0"
+      },
+      "execution_count": 106,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "5\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "# Tanpa divide dan conquer\n",
+        "\n",
+        "def maxSubSum(arr):\n",
+        "    max_so_far=0\n",
+        "    max_ending_here=0\n",
+        "    for i in range(len(arr)):\n",
+        "      max_ending_here+=arr[i]\n",
+        "      if max_ending_here>max_so_far:\n",
+        "          max_so_far=max_ending_here\n",
+        "      if max_ending_here<0:\n",
+        "          max_ending_here=0\n",
+        "    return max_so_far\n",
+        "arr=[-2, -5, 6, -2, -3, 1, 5, -6]\n",
+        "result=maxSubSum(arr)\n",
+        "print(result)"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "8Vif7bnTlYeH",
+        "outputId": "fb199ae2-7ac8-4b12-a948-bbefc4c3ccdf"
+      },
+      "execution_count": 110,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "7\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "# Menggunakan Divide and Conquer\n",
+        "\n",
+        "def maxCrossingSum(arr,low,mid,high):\n",
+        "    result=0; leftSum=float('-infinity')\n",
+        "    for i in range(mid, low-1, -1):\n",
+        "        result+=arr[i]\n",
+        "        if result>leftSum:\n",
+        "            leftSum=result\n",
+        "    result=0; rightSum=float('-infinity')\n",
+        "    for i in range(mid+1, high+1):\n",
+        "        result+=arr[i]\n",
+        "        if result>rightSum:\n",
+        "           rightSum=result\n",
+        "    return leftSum+rightSum\n",
+        "\n",
+        "\n",
+        "def maxSum(arr,low,high):\n",
+        "    if low==high:\n",
+        "        return arr[low]\n",
+        "    mid=(low+high)//2\n",
+        "    return max(maxSum(arr,low,mid),maxSum(arr,mid+1,high),maxCrossingSum(arr,low,mid,high))\n",
+        "\n",
+        "arr=[-2, -5, 6, -2, -3,  1, 5, -6]\n",
+        "result=maxSum(arr,0,len(arr)-1)\n",
+        "print(result)"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "nnTdzQqDmteT",
+        "outputId": "23392b6b-aaae-4d11-a515-4e7fa607a59d"
+      },
+      "execution_count": 132,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "7\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "# Longest Common Prefix\n",
+        "def longestCommonPrefix(a):\n",
+        "\n",
+        "    size = len(a)\n",
+        "\n",
+        "    # if size is 0, return empty string\n",
+        "    if (size == 0):\n",
+        "        return \"\"\n",
+        "\n",
+        "    if (size == 1):\n",
+        "        return a[0]\n",
+        "\n",
+        "    # sort the array of strings\n",
+        "    a.sort()\n",
+        "\n",
+        "    #find the minimum length from\n",
+        "    # first and last string\n",
+        "    end = min(len(a[0]), len(a[size - 1]))\n",
+        "\n",
+        "    # find the common prefix between\n",
+        "    # the first and last string\n",
+        "    i = 0\n",
+        "    while (i < end and\n",
+        "           a[0][i] == a [size - 1][i]):\n",
+        "      i += 1\n",
+        "\n",
+        "    pre = a[0][0 : i]\n",
+        "    return pre\n",
+        "\n",
+        "arr=[\"geeksforgeeks\", \"geeks\", \"geek\", \"geezer\"]\n",
+        "result=longestCommonPrefix(arr)\n",
+        "print(result)\n",
+        "\n",
+        "arr=[\"apple\",\"ape\",\"april\"]\n",
+        "result=longestCommonPrefix(arr)\n",
+        "print(result)"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "TAmYHowRqh2h",
+        "outputId": "e2ecafb2-8508-4ae6-8a31-4a95f67259e3"
+      },
+      "execution_count": 137,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "gee\n",
+            "ap\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "# median data dari2 array dengan divide dan conquer\n",
+        "\n",
+        "def medianOfArray(arr1,arr2,n):\n",
+        "    m1=-1\n",
+        "    m2=-1\n",
+        "    count=0\n",
+        "    i=j=0\n",
+        "    while count<n+1:\n",
+        "        count+=1\n",
+        "        if i==n:\n",
+        "           m1=m2\n",
+        "           m2=arr2[0]\n",
+        "           break\n",
+        "        if j==n:\n",
+        "           m1=m2\n",
+        "           m2=arr1[0]\n",
+        "           break\n",
+        "        if arr1[i]<arr2[j]:\n",
+        "           m1=m2\n",
+        "           m2=arr1[i]\n",
+        "           i+=1\n",
+        "        else:\n",
+        "           m1=m2\n",
+        "           m2=arr2[j]\n",
+        "           j+=1\n",
+        "    return (m1+m2)//2\n",
+        "\n",
+        "arr1=[1, 12, 15, 26, 38]\n",
+        "arr2=[2, 13, 17, 30, 45]\n",
+        "\n",
+        "print(medianOfArray(arr1,arr2,len(arr1)))"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "OU5YsSM4lc_n",
+        "outputId": "b437b631-b862-4381-c112-b4f5b448f050"
+      },
+      "execution_count": 138,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "16\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "def Solution(arr):\n",
+        "    n = len(arr)\n",
+        "    # if length of array is even\n",
+        "    if n % 2 == 0:\n",
+        "        z = n // 2\n",
+        "        e = arr[z]\n",
+        "        q = arr[z - 1]\n",
+        "        ans = (e + q) / 2\n",
+        "        return ans\n",
+        "    # if length of array is old\n",
+        "    else:\n",
+        "        z = n // 2\n",
+        "        ans = arr[z]\n",
+        "        return ans\n",
+        "\n",
+        "arr1 = [-5, 3, 6, 12, 15]\n",
+        "arr2 = [-12, -10, -6, -3, 4, 10]\n",
+        "#concatenating the two array\n",
+        "arr3 = arr1 + arr2\n",
+        "#sorting the resultant array\n",
+        "arr3.sort()\n",
+        "print(\"Median = \", Solution(arr3))"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "p_VFBRY7ua6-",
+        "outputId": "70d59477-d154-4b31-e35d-19c0f48a2dd9"
+      },
+      "execution_count": 139,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "Median =  3\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "#floor in sorted array\n",
+        "\n",
+        "def floorSorted(arr,low,high,x):\n",
+        "    #print(low,high)\n",
+        "    if low>high:\n",
+        "      return -1\n",
+        "\n",
+        "    if arr[low]>x:\n",
+        "      #print(\"inside\")\n",
+        "      return -1\n",
+        "\n",
+        "    if arr[high]<=x:\n",
+        "      return arr[high]\n",
+        "\n",
+        "    mid=(low+high)//2\n",
+        "\n",
+        "    if arr[mid]==x:\n",
+        "      return arr[mid]\n",
+        "\n",
+        "    if mid>0 and x>=arr[mid-1] and arr[mid]>x:\n",
+        "      return arr[mid-1]\n",
+        "\n",
+        "    if mid < high and x<arr[mid+1] and x>=arr[mid]:\n",
+        "      return arr[mid]\n",
+        "\n",
+        "    if x>arr[mid]:\n",
+        "      return floorSorted(arr,mid+1,high,x)\n",
+        "    else:\n",
+        "      return floorSorted(arr,low,mid-1,x)\n",
+        "\n",
+        "arr=[1,2,8,10,12,14,19]\n",
+        "x=5\n",
+        "print(floorSorted(arr,0,len(arr)-1,x))"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "YWEBaC7SujxF",
+        "outputId": "9b68041f-c2d9-419a-db04-ab6d47855cfb"
+      },
+      "execution_count": 140,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "2\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "# Mencari nilai terdekat dengan metode divide dan conquer\n",
+        "\n",
+        "def closestNumber(arr,low,high,x):\n",
+        "    if low>high:\n",
+        "        return -1\n",
+        "    if arr[high]<=x:\n",
+        "        return arr[high]\n",
+        "    if arr[low]>=x:\n",
+        "        return arr[low]\n",
+        "    mid=(low+high)//2\n",
+        "    if arr[mid]==x:\n",
+        "        return arr[mid]\n",
+        "    abs_mid=abs(arr[mid-1]-x)\n",
+        "    if mid>0:\n",
+        "        abs_left=abs(arr[mid-1]-x)\n",
+        "        if abs_left<abs_mid:\n",
+        "            return closestNumber(arr,low,mid-1,x)\n",
+        "    if mid<high:\n",
+        "        abs_right=abs(arr[mid+1]-x)\n",
+        "        if abs_rigt<abs_mid:\n",
+        "            return closestNumber(arr,mid+1,high,x)\n",
+        "    #print('after')\n",
+        "    return arr[mid]\n",
+        "\n",
+        "arr=[2, 5, 6, 7, 8, 9]\n",
+        "x = 9\n",
+        "print(closestNumber(arr,0,len(arr)-1,x))"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "u2bsiKFSuqiV",
+        "outputId": "4c06f9cd-9094-414e-b7c5-be417849bb41"
+      },
+      "execution_count": 141,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "9\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "def find_closest(lst,k):\n",
+        "    lst.sort()\n",
+        "    closest_num = lst[0]\n",
+        "    for num in lst:\n",
+        "        if abs(num - k) < abs(closest_num - k):\n",
+        "            closest_num = num\n",
+        "        if num > k:\n",
+        "            break\n",
+        "    return closest_num\n",
+        "\n",
+        "lst = [3.64, 5.2, 9.42, 9.35, 8.5, 8]\n",
+        "k = 9.1\n",
+        "print(find_closest(lst, k))\n",
+        "\n",
+        "lst = [2,5,5,7,8,8,9]\n",
+        "k = 6\n",
+        "print(find_closest(lst, k))"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "9Wfv9kMqx1o7",
+        "outputId": "87aa6d0f-8736-4969-a707-04833a7dd80d"
+      },
+      "execution_count": 144,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "9.35\n",
+            "5\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "\n",
+        "# Mencari fixed point dengan metode divide dan conquer\n",
+        "\n",
+        "def fixedPoint(arr,low,high):\n",
+        "  if low>high:\n",
+        "    return -1\n",
+        "  if arr[high]==high:\n",
+        "    return arr[high]\n",
+        "  if arr[low]==low:\n",
+        "    return arr[low]\n",
+        "  mid=(low+high)//2\n",
+        "  if arr[mid]==mid:\n",
+        "    return arr[mid]\n",
+        "  if mid>arr[mid]:\n",
+        "    return fixedPoint(arr,mid+1,high)\n",
+        "  else:\n",
+        "    return fixedPoint(arr,low,mid-1)\n",
+        "\n",
+        "arr=[9,1,4,5,2]\n",
+        "print(fixedPoint(arr,0,len(arr)-1))"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "M6kdNbutyKNa",
+        "outputId": "cc601f07-2c8f-4e74-cab5-8541674da17a"
+      },
+      "execution_count": 142,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "1\n"
+          ]
+        }
+      ]
+    }
+  ]
+} 
